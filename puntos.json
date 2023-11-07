@@ -1,0 +1,90 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Villanueva"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.5082955, 3.4299968]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Asturias"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.50295, 3.43815]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Eduardo Santos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.4900, 3.4200]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Alfonso Barberena A."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.5094779188332,  3.43365585]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "El Paraíso"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.5062766739497, 3.43190245]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Fenalco Kennedy"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-76.4993819932353, 3.4379695]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Nueva Floresta"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.4970088, 3.438543]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Julio Rincón"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [ -76.5014291,3.4269339]
+      }
+    },
+  ]
+}
+
+
+
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Geovisor de Cali - Comuna 12</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Incluir Leaflet CSS y JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Incluir el complemento Control.Scale -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Incluir el complemento Leaflet.heat para los puntos de calor -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Geovisor de Cali - Comuna 12</h1>
+    <div id="map"></div>
+    
+    <button id="toggleHeatmap">Mostrar Puntos de Calor</button>
+
+    <script>
+        var map = L.map('map').setView([3.424169, -76.546945], 14);
+
+        // Agregar capa de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Crear una capa de puntos
+        var puntosLayer = L.layerGroup();
+
+        // Array con la información de los 10 barrios más importantes
+        var barrios = [
+            { name: "Villanueva", lat: 3.4299968, lng: -76.5082955 },
+            { name: "Asturias", lat: 3.4381468, lng: -76.5029526 },
+            { name: "Eduardo Santos", lat: 3.428888, lng: -76.5052602132988 },
+            { name: "Alfonso Barberena A", lat: 3.43365585, lng: -76.5094779188332 },
+            { name: "El Paraíso", lat: 3.43190245, lng: -76.5062766739497 },
+            { name: "Fenalco Kennedy", lat: 3.4379695, lng: -76.4993819932353 },
+            { name: "Nueva Floresta", lat: 3.438543, lng: -76.4970088 },
+            { name: "Julio Rincón", lat: 3.4269339, lng: -76.5014291 },
+            { name: "Doce de Octubre", lat: 3.4277777, lng: -76.5031391613133 },
+            { name: "El Rodeo", lat: 3.42546, lng: -76.503789 }
+        ];
+
+        // Agregar marcadores para los barrios a la capa de puntos
+        for (var i = 0; i < barrios.length; i++) {
+            L.marker([barrios[i].lat, barrios[i].lng]).bindPopup(barrios[i].name).addTo(puntosLayer);
+        }
+
+        // Capa de puntos de calor (inicialmente vacía)
+        var heatmapLayer = L.heatLayer([], { radius: 25 });
+
+        // Función para mostrar/ocultar la capa de puntos de calor
+        var isHeatmapVisible = false;
+        document.getElementById('toggleHeatmap').addEventListener('click', function () {
+            if (isHeatmapVisible) {
+                map.removeLayer(heatmapLayer);
+                isHeatmapVisible = false;
+                this.textContent = 'Mostrar Puntos de Calor';
+            } else {
+                // Llenar la capa de puntos de calor con datos de ejemplo
+                var heatmapData = [];
+                for (var i = 0; i < barrios.length; i++) {
+                    // Generar puntos de calor con intensidad aleatoria
+                    var intensity = Math.floor(Math.random() * 10); // Puedes personalizar la intensidad
+                    heatmapData.push([barrios[i].lat, barrios[i].lng, intensity]);
+                }
+                heatmapLayer.setLatLngs(heatmapData);
+                map.addLayer(heatmapLayer);
+                isHeatmapVisible = true;
+                this.textContent = 'Ocultar Puntos de Calor';
+            }
+        });
+
+        // Agregar control de capas
+        var baseLayers = {
+            "Mapa": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            })
+        };
+
+        var overlayLayers = {
+            "Barrios": puntosLayer,
+            "Puntos de Calor": heatmapLayer
+        };
+
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+
+        // Agregar la escala numérica
+        L.control.scale().addTo(map);
+    </script>
+</body>
+</html>
